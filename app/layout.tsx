@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { ThemeProvider } from "@/components/themes/theme-provider";
+import { Bounce, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -15,8 +17,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Municipal Health",
-  description: "Municipal Health of San Jose Dinagat Island",
+  title: "Title here",
+  description: "Description here",
 };
 
 export default function RootLayout({
@@ -36,6 +38,19 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          <ToastContainer
+            position="bottom-left"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+            transition={Bounce}
+          />
         </ThemeProvider>
       </body>
     </html>

@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { signup } from "@/lib/actions/auth-action";
 import { useState } from "react";
 import { Loader } from "lucide-react";
+import { toast } from "react-toastify";
 
 export default function SignUp() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -17,9 +18,14 @@ export default function SignUp() {
 
     setLoading(true);
     try {
-      await signup(formData);
+      const { error } = await signup(formData);
+      if (error) {
+        toast.error(`Error: ${error}`);
+      }
     } catch (error) {
-      console.error("Registration error: ", error);
+      const errorMessage =
+        error instanceof Error ? error.message : "An unexpected error occurred";
+      toast.error(`Error: ${errorMessage}`);
     } finally {
       setLoading(false);
     }
