@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "./ui/button";
-import { signout } from "@/lib/actions/auth-action";
+import { signOut } from "@/lib/actions/auth-action";
 import { Loader } from "lucide-react";
 
 export default function SignOutButton() {
@@ -11,7 +11,7 @@ export default function SignOutButton() {
   const handleSignOut = async () => {
     setLoading(true);
     try {
-      await signout();
+      await signOut();
     } catch (error) {
       console.error("Signout error: ", error);
     }

@@ -8,8 +8,10 @@ import { signup } from "@/lib/actions/auth-action";
 import { useState } from "react";
 import { Loader } from "lucide-react";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 export default function SignUp() {
+  const router = useRouter()
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleSumbit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -18,10 +20,10 @@ export default function SignUp() {
 
     setLoading(true);
     try {
-      const { error } = await signup(formData);
+      const { error, success } = await signup(formData);
       if (error) {
         toast.error(`Error: ${error}`);
-      }
+      }else if(success) router.push("/")
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : "An unexpected error occurred";
@@ -35,7 +37,7 @@ export default function SignUp() {
     <form onSubmit={handleSumbit}>
       <div className="mx-auto grid w-[350px] gap-6">
         <div className="grid gap-2 text-center">
-          <h1 className="text-3xl font-bold">Sign up</h1>
+          <h1 className="text-3xl font-bold">Create an account</h1>
           <p className="text-balance text-muted-foreground">
             Enter credentials to create an account
           </p>

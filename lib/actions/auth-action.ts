@@ -44,7 +44,7 @@ export async function signup(
   return { success: true };
 }
 
-export async function signout() {
+export async function signOut() {
   const supabase = createClient();
   await supabase.auth.signOut();
   revalidatePath("/", "layout");
