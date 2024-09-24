@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { ThemeProvider } from "@/components/themes/theme-provider";
 import { Bounce, ToastContainer } from "react-toastify";
+import UserLayout from "@/components/user-layout/layout";
+import { createClient } from "@/lib/supabase/server";
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
+import { useEffect, useState } from "react";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -21,11 +24,14 @@ export const metadata: Metadata = {
   description: "Description here",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const supabase = createClient();
+  const { data } = await supabase.auth.getUser();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -37,7 +43,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          {data?.user ? <UserLayout>{children}</UserLayout> : children}
           <ToastContainer
             position="bottom-left"
             autoClose={5000}

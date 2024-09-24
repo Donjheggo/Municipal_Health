@@ -5,16 +5,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { LogOut, User, MessageSquareMore, Bell, AlignLeft } from "lucide-react";
+import { LogOut, User, AlignLeft } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { createClient } from "@/lib/supabase/server";
-import { signOut } from "@/lib/actions/auth-action";
 import { ThemeToggler } from "../themes/theme-toggler";
 import { Button } from "../ui/button";
-import { userLinks, pages } from "./sidenav";
+import { userLinks } from "./sidenav";
+import { signOut } from "@/lib/actions/auth-action";
 import Link from "next/link";
-import Image from "next/image";
-import React from "react";
 
 export default async function Header() {
   const supabase = createClient();
@@ -28,39 +26,14 @@ export default async function Header() {
             <span className="sr-only">Toggle navigation menu</span>
           </Button>
         </SheetTrigger>
-        <SheetContent side="left" className="flex flex-col">
-          <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-            <Link
-              href="/profile"
-              className="flex items-center gap-2 hover:bg-muted rounded-md p-2"
-            >
-              <Image
-                src={data?.user?.user_metadata.picture}
-                alt="user-avatar"
-                height={35}
-                width={35}
-                className="rounded-full"
-              />
-              <h1 className="text-md">{data?.user?.user_metadata.name}</h1>
-            </Link>
+        <SheetContent
+          side="left"
+          className="flex flex-col item-start w-[250px]"
+        >
+          <nav className="grid items-start text-sm font-medium">
             <div className="mt-2">
               <p className="text-sm font-medium text-muted-foreground pb-2 max-w-[248px] truncate">
                 Pages
-              </p>
-              {pages.map((item, index) => (
-                <Link
-                  href={item.href}
-                  key={index}
-                  className="flex items-center gap-2 hover:bg-muted rounded-md p-2"
-                >
-                  {item.icon}
-                  <h1 className="text-md">{item.name}</h1>
-                </Link>
-              ))}
-            </div>
-            <div className="mt-2">
-              <p className="text-sm font-medium text-muted-foreground pb-2 max-w-[248px] truncate">
-                Management
               </p>
               {userLinks.map((item, index) => (
                 <Link
@@ -82,7 +55,10 @@ export default async function Header() {
                 <ThemeToggler>Theme</ThemeToggler>
               </div>
               <form action={signOut}>
-                <button className="text-md flex items-center gap-2 hover:bg-muted rounded-md p-2 w-full">
+                <button
+                  type="submit"
+                  className="text-md flex items-center gap-2 hover:bg-muted rounded-md p-2 w-full"
+                >
                   <LogOut />
                   Logout
                 </button>
@@ -93,22 +69,10 @@ export default async function Header() {
       </Sheet>
 
       <div className="ml-auto flex items-center gap-2">
-        <Button variant="outline" size="icon" className="rounded-full">
-          <MessageSquareMore />
-        </Button>
-        <Button variant="outline" size="icon" className="rounded-full">
-          <Bell />
-        </Button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild className="hover:cursor-pointer">
             <Button variant="outline" size="icon" className="rounded-full">
-              <Image
-                src={data?.user?.user_metadata.picture}
-                alt="user-avatar"
-                height={40}
-                width={40}
-                className="rounded-full"
-              />
+              <User />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
@@ -127,8 +91,8 @@ export default async function Header() {
               </ThemeToggler>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <form>
-              <button formAction={signOut} className="w-full">
+            <form action={signOut}>
+              <button type="submit" className="w-full">
                 <DropdownMenuItem className="hover:cursor-pointer flex gap-2">
                   <LogOut />
                   Logout

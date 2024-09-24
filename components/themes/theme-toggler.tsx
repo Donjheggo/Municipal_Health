@@ -11,7 +11,7 @@ export function ThemeToggler({ children }: { children: React.ReactNode }) {
   return (
     <Button
       className="w-full flex items-center justify-start border-0 p-2 gap-2"
-      variant="outline"
+      variant="ghost"
       size="icon"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
     >

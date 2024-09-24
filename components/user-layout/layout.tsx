@@ -11,7 +11,9 @@ export default async function UserLayout({
       <Sidenav />
       <div className="flex flex-col">
         <Header />
-        <div className="max-w-screen-xl mx-auto">{children}</div>
+        <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
+          {children}
+        </main>
       </div>
     </div>
   );
