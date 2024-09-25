@@ -46,7 +46,15 @@ export type Database = {
           service_id?: string
           status?: Database["public"]["Enums"]["APPOINTMENT_STATUS"]
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "appointments_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       doctors: {
         Row: {

@@ -6,6 +6,7 @@ const supabase = createClient();
 
 export async function CreateBooking(form: FormData) {
   try {
+    const { data } = await supabase.auth.getUser();
     const { error } = await supabase.from("appointments").insert([
       {
         name: form.get("name"),
@@ -16,6 +17,7 @@ export async function CreateBooking(form: FormData) {
         service_id: form.get("service_id"),
         schedule: form.get("schedule"),
         status: "PENDING",
+        user_id: data.user?.id,
       },
     ]);
 
