@@ -5,7 +5,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { LogOut, User, AlignLeft } from "lucide-react";
+import { LogOut, Settings, AlignLeft } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { createClient } from "@/lib/supabase/server";
 import { ThemeToggler } from "../themes/theme-toggler";
@@ -79,7 +79,7 @@ export default async function Header() {
         <DropdownMenu>
           <DropdownMenuTrigger asChild className="hover:cursor-pointer">
             <Button variant="outline" size="icon" className="rounded-full">
-              <User />
+              <Settings />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">

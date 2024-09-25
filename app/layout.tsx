@@ -20,8 +20,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Title here",
-  description: "Description here",
+  title: "San Jose Municipal Health",
+  description: "San Jose Dinagat Municipal Health appointment booking application.",
 };
 
 export default async function RootLayout({

@@ -115,7 +115,7 @@ export default function BookingForm() {
           <Input
             name="contact_number"
             id="contact_number"
-            type="tel"
+            type="number"
             placeholder="09123456789"
             required
           />

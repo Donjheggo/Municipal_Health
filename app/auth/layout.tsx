@@ -1,5 +1,5 @@
 import Image from "next/image";
-import placeholder from "@/app/placeholder.svg";
+import placeholder from "@/app/auth-img.jpg";
 export default async function AuthLayout({
   children,
 }: {

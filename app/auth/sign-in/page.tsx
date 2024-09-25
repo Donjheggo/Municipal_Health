@@ -47,7 +47,7 @@ export default function SignIn() {
               name="email"
               id="email"
               type="email"
-              placeholder="donjheggo@gmail.com"
+              placeholder="sample@gmail.com"
               required
             />
           </div>
