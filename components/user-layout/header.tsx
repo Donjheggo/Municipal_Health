@@ -32,15 +32,10 @@ export default async function Header() {
           side="left"
           className="flex flex-col item-start w-[280px]"
         >
-          <Link
-            href="/"
-            className="flex items-center gap-2 font-semibold"
-          >
+          <Link href="/" className="flex items-center gap-2 font-semibold">
             <Image src={logo} width={30} height={30} alt="logo" />
 
-            <span className="text-sm">
-              San Jose Municipal Health
-            </span>
+            <span className="text-sm">San Jose Municipal Health</span>
           </Link>
           <nav className="grid items-start text-sm font-medium">
             <div className="mt-2">
@@ -63,13 +58,6 @@ export default async function Header() {
               <p className="text-sm font-medium text-muted-foreground pb-2 max-w-[248px] truncate">
                 Settings
               </p>
-              <Link
-                href="/profile"
-                className="flex items-center gap-2 hover:bg-muted rounded-md p-2"
-              >
-                <User />
-                <h1 className="text-md">Profile</h1>
-              </Link>
               <div className="flex items-center gap-2">
                 <ThemeToggler>Theme</ThemeToggler>
               </div>
@@ -95,12 +83,6 @@ export default async function Header() {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem className="hover:cursor-pointer" asChild>
-              <Link href="/profile" className="flex items-center gap-2">
-                <User />
-                Profile
-              </Link>
-            </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem className="hover:cursor-pointer" asChild>
               <ThemeToggler>

@@ -20,11 +20,8 @@ export default async function Sidenav() {
     <aside className="hidden border-r md:block">
       <div className="flex h-full max-h-screen flex-col gap-2">
         <div className="flex h-14 items-center border-b px-4 py-5 lg:h-[60px] lg:px-6 ">
-          <Link
-            href="/"
-            className="flex items-center gap-2 font-semibold"
-          >
-            <Image src={logo} width={30} height={30} alt="logo"/>
+          <Link href="/" className="flex items-center gap-2 font-semibold">
+            <Image src={logo} width={30} height={30} alt="logo" />
 
             <span className="text-sm lg:text-base">
               San Jose Municipal Health
@@ -53,13 +50,7 @@ export default async function Sidenav() {
               <p className="text-sm font-medium text-muted-foreground pb-2 max-w-[248px] truncate">
                 Settings
               </p>
-              <Link
-                href="/profile"
-                className="flex items-center gap-2 hover:bg-muted rounded-md p-2"
-              >
-                <User />
-                <h1 className="text-md">Profile</h1>
-              </Link>
+
               <div className="flex items-center gap-2">
                 <ThemeToggler>Theme</ThemeToggler>
               </div>
