@@ -80,7 +80,6 @@ export default async function Header() {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuSeparator />
             <DropdownMenuItem className="hover:cursor-pointer" asChild>
               <ThemeToggler>
                 <span className="font-normal opacity-95 dark:opacity-100">
