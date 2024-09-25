@@ -1,9 +1,5 @@
 import {
-  Package2,
   LogOut,
-  UsersRound,
-  PencilLine,
-  User,
   House,
   NotebookPen,
   Hospital,

@@ -7,7 +7,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { LogOut, Settings, AlignLeft } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { createClient } from "@/lib/supabase/server";
 import { ThemeToggler } from "../themes/theme-toggler";
 import { Button } from "../ui/button";
 import { userLinks } from "./sidenav";
@@ -17,8 +16,6 @@ import Image from "next/image";
 import logo from "@/app/logo.png";
 
 export default async function Header() {
-  const supabase = createClient();
-  const { data } = await supabase.auth.getUser();
   return (
     <header className="flex h-14 items-center gap-4 border-b px-4 lg:h-[60px] lg:px-6">
       <Sheet>

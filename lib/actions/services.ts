@@ -10,7 +10,7 @@ export async function GetServices(
   items_per_page: number
 ) {
   try {
-    let query = supabase
+    const query = supabase
       .from("services")
       .select("*")
       .order("name", { ascending: true })

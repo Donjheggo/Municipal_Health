@@ -6,7 +6,6 @@ import UserLayout from "@/components/user-layout/layout";
 import { createClient } from "@/lib/supabase/server";
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
-import { useEffect, useState } from "react";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
