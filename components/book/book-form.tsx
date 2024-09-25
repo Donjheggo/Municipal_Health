@@ -11,7 +11,7 @@ import {
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { Loader } from "lucide-react";
+import { Loader, SendHorizontal } from "lucide-react";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
@@ -135,7 +135,14 @@ export default function BookingForm() {
           </Select>
         </div>
         <Button size="lg" disabled={loading} type="submit" className="w-full">
-          {loading ? <Loader className="animate-spin" /> : "Submit Booking"}
+          {loading ? (
+            <Loader className="animate-spin" />
+          ) : (
+            <>
+              <h1 className="mr-2"> Submit Booking</h1>
+              <SendHorizontal size={18}/>
+            </>
+          )}
         </Button>
       </div>
     </form>

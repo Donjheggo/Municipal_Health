@@ -27,7 +27,7 @@ export default async function AppointmentCard({
           <h1 className="ml-1">{FormatDateTime(new Date(item.schedule))}</h1>
         </div>
         <h1>
-          <Badge variant="outline"> {item.status} </Badge>
+          <Badge variant="default"> {item.status} </Badge>
         </h1>
         <div className="mt-2">
           <h1>Name: {item.name}</h1>
