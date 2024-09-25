@@ -1,7 +1,6 @@
 "use server";
 
 import { createClient } from "../supabase/server";
-import { toast } from "react-toastify";
 
 const supabase = createClient();
 
@@ -18,17 +17,17 @@ export async function GetServices(
       .range((page - 1) * items_per_page, page * items_per_page - 1);
 
     const { data, error } = searchQuery
-      ? await query.textSearch("name", searchQuery)
+      ? await query.ilike("name", `%${searchQuery}%`)
       : await query;
 
     if (error) {
-      toast.error(error.message);
+      console.error(error.message);
       return [];
     }
     return data || [];
   } catch (error) {
     if (error instanceof Error) {
-      toast.error(error.message);
+      console.error(error.message);
       return [];
     }
   }
@@ -39,16 +38,35 @@ export async function TotalServices() {
     const { data, error } = await supabase.from("services").select("*");
 
     if (error) {
-      toast.error(error.message);
+      console.error(error.message);
       return 0;
     }
-
     return data?.length || 0;
   } catch (error) {
     if (error instanceof Error) {
-      toast.error(error.message);
+      console.error(error.message);
       return 0;
     }
     return 0;
+  }
+}
+
+export async function GetAllServices() {
+  try {
+    const { data, error } = await supabase
+      .from("services")
+      .select("*")
+      .order("name", { ascending: true });
+
+    if (error) {
+      console.error(error.message);
+      return [];
+    }
+    return data || [];
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+      return [];
+    }
   }
 }

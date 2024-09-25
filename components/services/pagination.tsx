@@ -16,8 +16,6 @@ export function TablePagination({ totalPages }: { totalPages: number }) {
   const currentPage = Number(searchParams.get("page")) || 1;
   const lastpage = Math.ceil(totalPages);
 
-  console.log("Total Page:", totalPages);
-  console.log("Last page: ", lastpage);
   const createPageUrl = (pageNumber: number | string) => {
     const params = new URLSearchParams(searchParams);
     params.set("page", pageNumber.toString());

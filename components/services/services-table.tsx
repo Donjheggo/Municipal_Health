@@ -35,7 +35,7 @@ export default async function ServicesTable({
   const totalPages = Math.ceil(totalServices / items_per_page);
 
   return (
-    <Card className="w-full md:w-[400px]">
+    <Card className="w-full shadow-none bg-background">
       <CardHeader>
         <CardTitle>Services</CardTitle>
         <CardDescription>List and prices of our services.</CardDescription>
