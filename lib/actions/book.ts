@@ -2,10 +2,9 @@
 import { revalidatePath } from "next/cache";
 import { createClient } from "../supabase/server";
 
-const supabase = createClient();
-
 export async function CreateBooking(form: FormData) {
   try {
+    const supabase = createClient();
     const { data } = await supabase.auth.getUser();
     const { error } = await supabase.from("appointments").insert([
       {

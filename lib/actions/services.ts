@@ -2,13 +2,12 @@
 
 import { createClient } from "../supabase/server";
 
-const supabase = createClient();
-
 export async function GetServices(
   searchQuery: string,
   page: number,
   items_per_page: number
 ) {
+  const supabase = createClient();
   try {
     const query = supabase
       .from("services")
@@ -35,6 +34,7 @@ export async function GetServices(
 
 export async function TotalServices() {
   try {
+    const supabase = createClient();
     const { data, error } = await supabase.from("services").select("*");
 
     if (error) {
@@ -53,6 +53,7 @@ export async function TotalServices() {
 
 export async function GetAllServices() {
   try {
+    const supabase = createClient();
     const { data, error } = await supabase
       .from("services")
       .select("*")

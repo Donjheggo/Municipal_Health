@@ -3,10 +3,10 @@
 import { createClient } from "../supabase/server";
 import { revalidatePath } from "next/cache";
 
-const supabase = createClient();
-
 export async function GetMyAppointments(user_id: string) {
   try {
+    const supabase = createClient();
+
     const { error, data } = await supabase
       .from("appointments")
       .select("*")
@@ -26,6 +26,7 @@ export async function GetMyAppointments(user_id: string) {
 
 export async function GetAppointmentById(id: string) {
   try {
+    const supabase = createClient();
     const { error, data } = await supabase
       .from("services")
       .select("*")
@@ -45,6 +46,7 @@ export async function GetAppointmentById(id: string) {
 
 export async function CancelAppointment(id: string) {
   try {
+    const supabase = createClient();
     const { error } = await supabase
       .from("appointments")
       .update({ status: "CANCELLED" })
