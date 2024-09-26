@@ -1,5 +1,8 @@
 import ServicesTable from "@/components/services/services-table";
 import SearchBar from "@/components/services/search-bar";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 
 export default function Services({
   searchParams,
@@ -16,6 +19,14 @@ export default function Services({
         <SearchBar />
         <div className="mt-2">
           <ServicesTable searchQuery={searchQuery} page={page} />
+        </div>
+        <div className="mt-2">
+          <Link href="/book">
+            <Button className="w-full">
+              Book Now
+              <ArrowRight size={18} className="ml-2" />
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

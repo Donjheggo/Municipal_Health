@@ -75,7 +75,7 @@ export const userLinks = [
   },
   {
     name: "Services",
-    href: "/health-services",
+    href: "/services",
     icon: <Hospital />,
   },
   {
