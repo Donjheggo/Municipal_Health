@@ -1,17 +1,26 @@
+"use client";
+
 import {
   LogOut,
   House,
   NotebookPen,
   Hospital,
   CalendarDays,
+  LayoutDashboard,
+  Users,
 } from "lucide-react";
 import { ThemeToggler } from "../themes/theme-toggler";
 import { signOut } from "@/lib/actions/auth-action";
 import Link from "next/link";
 import logo from "@/app/logo.png";
 import Image from "next/image";
+import { useUser } from "@/context/user-context";
 
-export default async function Sidenav() {
+export default function Sidenav() {
+  const { user, loading } = useUser();
+
+  if (loading) return <div></div>;
+
   return (
     <aside className="hidden border-r md:block">
       <div className="flex h-full max-h-screen flex-col gap-2">
@@ -41,6 +50,24 @@ export default async function Sidenav() {
                 </Link>
               ))}
             </div>
+
+            {user?.role === "ADMIN" && (
+              <div className="mt-2">
+                <p className="text-sm font-medium text-muted-foreground pb-2 max-w-[248px] truncate">
+                  Admin
+                </p>
+                {adminLinks.map((item, index) => (
+                  <Link
+                    href={item.href}
+                    key={index}
+                    className="flex items-center gap-2 hover:bg-muted rounded-md p-2"
+                  >
+                    {item.icon}
+                    <h1 className="text-md">{item.name}</h1>
+                  </Link>
+                ))}
+              </div>
+            )}
 
             <div className="mt-2">
               <p className="text-sm font-medium text-muted-foreground pb-2 max-w-[248px] truncate">
@@ -87,5 +114,28 @@ export const userLinks = [
     name: "Appointments",
     href: "/appointments",
     icon: <CalendarDays />,
+  },
+];
+
+export const adminLinks = [
+  {
+    name: "Dashboard",
+    href: "/dashboard",
+    icon: <LayoutDashboard />,
+  },
+  {
+    name: "Services",
+    href: "/dashboard/services",
+    icon: <Hospital />,
+  },
+  {
+    name: "Appointments",
+    href: "/dashboard/appointments",
+    icon: <CalendarDays />,
+  },
+  {
+    name: "Users",
+    href: "/dashboard/users",
+    icon: <Users />,
   },
 ];

@@ -7,6 +7,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
   Table,
   TableBody,
   TableCell,
@@ -16,7 +22,12 @@ import {
 } from "@/components/ui/table";
 import { GetServices, GetTotalServices } from "@/lib/actions/services";
 import { TablePagination } from "./pagination";
-import { Badge } from "../ui/badge";
+import DeleteButton from "./delete-button";
+import { MoreHorizontal } from "lucide-react";
+import { Button } from "../../ui/button";
+import { DropdownMenuSeparator } from "@radix-ui/react-dropdown-menu";
+import UpdateButton from "./update-button";
+import { Badge } from "@/components/ui/badge";
 
 export default async function ServicesTable({
   searchQuery,
@@ -25,7 +36,7 @@ export default async function ServicesTable({
   searchQuery: string;
   page: number;
 }) {
-  const items_per_page = 10;
+  const items_per_page = 9;
 
   const [totalServices, services] = await Promise.all([
     GetTotalServices(),
@@ -33,12 +44,11 @@ export default async function ServicesTable({
   ]);
 
   const totalPages = Math.ceil(totalServices / items_per_page);
-
   return (
     <Card className="w-full shadow-none bg-background">
       <CardHeader>
         <CardTitle>Services</CardTitle>
-        <CardDescription>List and prices of our services.</CardDescription>
+        <CardDescription>Manage services.</CardDescription>
       </CardHeader>
       <CardContent>
         <Table>
@@ -46,14 +56,39 @@ export default async function ServicesTable({
             <TableRow>
               <TableHead className="table-cell">Name</TableHead>
               <TableHead className="table-cell">Price</TableHead>
+
+              <TableHead>
+                <span className="sr-only">Actions</span>
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {services?.map((item, index) => (
               <TableRow key={index}>
-                <TableCell className="font-normal">{item.name}</TableCell>
+                <TableCell>
+                  <p className="font-normal">{item.name}</p>
+                </TableCell>
                 <TableCell className="font-medium">
                   {item.price !== 0 ? `₱${item.price}` : <Badge>Free</Badge>}
+                </TableCell>
+                <TableCell>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button aria-haspopup="true" size="icon" variant="ghost">
+                        <MoreHorizontal className="h-4 w-4" />
+                        <span className="sr-only">Toggle menu</span>
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuItem>
+                        <UpdateButton id={item.id} />
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem>
+                        <DeleteButton id={item.id} />
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 </TableCell>
               </TableRow>
             ))}
@@ -62,9 +97,9 @@ export default async function ServicesTable({
       </CardContent>
       <CardFooter>
         <div className="text-xs text-muted-foreground">
-          Showing <strong>{(page - 1) * items_per_page + 1}</strong>-
+          <strong>{(page - 1) * items_per_page + 1}</strong>-
           <strong>{Math.min(page * items_per_page, totalServices)}</strong> of{" "}
-          <strong>{totalServices}</strong> services
+          <strong>{totalServices}</strong>
         </div>
         <div className="ml-auto">
           <TablePagination totalPages={totalPages} />

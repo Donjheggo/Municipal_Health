@@ -1,3 +1,5 @@
+"use client";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,13 +11,18 @@ import { LogOut, Settings, AlignLeft } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ThemeToggler } from "../themes/theme-toggler";
 import { Button } from "../ui/button";
-import { userLinks } from "./sidenav";
+import { userLinks, adminLinks } from "./sidenav";
 import { signOut } from "@/lib/actions/auth-action";
 import Link from "next/link";
 import Image from "next/image";
 import logo from "@/app/logo.png";
+import { useUser } from "@/context/user-context";
 
-export default async function Header() {
+export default function Header() {
+  const { user, loading } = useUser();
+
+  if (loading) return;
+
   return (
     <header className="flex h-14 items-center gap-4 border-b px-4 lg:h-[60px] lg:px-6">
       <Sheet>
@@ -50,6 +57,24 @@ export default async function Header() {
                 </Link>
               ))}
             </div>
+
+            {user?.role === "ADMIN" && (
+              <div className="mt-2">
+                <p className="text-sm font-medium text-muted-foreground pb-2 max-w-[248px] truncate">
+                  Admin
+                </p>
+                {adminLinks.map((item, index) => (
+                  <Link
+                    href={item.href}
+                    key={index}
+                    className="flex items-center gap-2 hover:bg-muted rounded-md p-2"
+                  >
+                    {item.icon}
+                    <h1 className="text-md">{item.name}</h1>
+                  </Link>
+                ))}
+              </div>
+            )}
 
             <div className="mt-2">
               <p className="text-sm font-medium text-muted-foreground pb-2 max-w-[248px] truncate">

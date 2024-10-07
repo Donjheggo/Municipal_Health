@@ -21,6 +21,7 @@ export type Database = {
           schedule: string
           service_id: string
           status: Database["public"]["Enums"]["APPOINTMENT_STATUS"]
+          user_id: string
         }
         Insert: {
           address: string
@@ -33,6 +34,7 @@ export type Database = {
           schedule: string
           service_id?: string
           status?: Database["public"]["Enums"]["APPOINTMENT_STATUS"]
+          user_id?: string
         }
         Update: {
           address?: string
@@ -45,6 +47,7 @@ export type Database = {
           schedule?: string
           service_id?: string
           status?: Database["public"]["Enums"]["APPOINTMENT_STATUS"]
+          user_id?: string
         }
         Relationships: [
           {
@@ -52,6 +55,13 @@ export type Database = {
             columns: ["service_id"]
             isOneToOne: false
             referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "appointments_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
             referencedColumns: ["id"]
           },
         ]

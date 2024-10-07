@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { createClient } from "../supabase/server";
 
 export async function GetServices(
@@ -32,7 +33,83 @@ export async function GetServices(
   }
 }
 
-export async function TotalServices() {
+export async function CreateService(formData: FormData) {
+  try {
+    const supabase = createClient();
+    const { error } = await supabase
+      .from("services")
+      .insert({ name: formData.get("name"), price: formData.get("price") })
+      .select();
+
+    if (error) {
+      return { error: error.message };
+    }
+    revalidatePath("/services");
+    revalidatePath("/dashboard/services");
+    return { error: "" };
+  } catch (error) {
+    console.error(error);
+    return { error: error };
+  }
+}
+
+export async function GetServiceById(id: string) {
+  try {
+    const supabase = createClient();
+    const { error, data } = await supabase
+      .from("services")
+      .select("*")
+      .eq("id", id)
+      .single();
+
+    if (error) {
+      console.error(error.message);
+      return false;
+    }
+    return data;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}
+
+export async function UpdateService(formData: FormData) {
+  try {
+    const supabase = createClient();
+    const { error } = await supabase
+      .from("services")
+      .update({ name: formData.get("name"), price: formData.get("price") })
+      .eq("id", formData.get("id"))
+      .select();
+
+    if (error) {
+      return { error: error };
+    }
+    revalidatePath("/services");
+    revalidatePath("/dashboard/services");
+    return { error: "" };
+  } catch (error) {
+    return { error: error };
+  }
+}
+
+export async function DeleteService(id: string) {
+  try {
+    const supabase = createClient();
+    const { error } = await supabase.from("services").delete().eq("id", id);
+
+    if (error) {
+      return { error: error };
+    }
+    revalidatePath("/services");
+    revalidatePath("/dashboard/services");
+    return { error: "" };
+  } catch (error) {
+    return { error: error };
+  }
+}
+
+export async function GetTotalServices() {
   try {
     const supabase = createClient();
     const { data, error } = await supabase.from("services").select("*");

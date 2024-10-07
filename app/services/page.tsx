@@ -1,5 +1,5 @@
 import ServicesTable from "@/components/services/services-table";
-import SearchBar from "@/components/services/search-bar";
+import SearchBar from "@/components/search-bar";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
