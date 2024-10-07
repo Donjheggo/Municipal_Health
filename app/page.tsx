@@ -16,7 +16,7 @@ import {
 
 export default function Home() {
   return (
-    <div className="container mx-auto px-4 py-12 min-h-screen flex flex-col">
+    <div className="container max-w-screen-lg mx-auto px-4 py-12 min-h-screen flex flex-col">
       <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-8 text-center text-primary">
         Welcome to San Jose Municipal Health
       </h1>

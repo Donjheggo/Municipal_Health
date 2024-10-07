@@ -8,7 +8,7 @@ export default async function BookPage() {
   const appointments = await GetMyAppointments(data.user?.id || "");
 
   return (
-    <div className="w-full md:w-[400px]">
+    <div className="container max-w-screen-sm mx-auto">
       <h1 className="text-2xl text-center">My Appointments</h1>
       <div className="mt-5 flex flex-col gap-2">
         {appointments.map((item, index) => (

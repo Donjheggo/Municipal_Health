@@ -13,7 +13,7 @@ export default function Services({
   const page = Number(searchParams?.page) || 1;
 
   return (
-    <div className="w-full md:w-[400px]">
+    <div className="container max-w-screen-sm mx-auto">
       <h1 className="text-center text-2xl">Our Services</h1>
       <div className="mt-5">
         <SearchBar />
