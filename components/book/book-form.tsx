@@ -17,7 +17,7 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { GetAllServices } from "@/lib/actions/services";
 import { Tables } from "@/database.types";
-import { CreateBooking } from "@/lib/actions/book";
+import { CreateAppointment } from "@/lib/actions/appointments";
 
 export default function BookingForm() {
   const router = useRouter();
@@ -29,7 +29,7 @@ export default function BookingForm() {
     const formData = new FormData(e.currentTarget);
     setLoading(true);
     try {
-      const { error } = await CreateBooking(formData);
+      const { error } = await CreateAppointment(formData);
       if (error) {
         toast.error(error.toString());
       }
