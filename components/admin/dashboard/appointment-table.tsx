@@ -1,17 +1,4 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -20,18 +7,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  GetAppointments,
-  GetTotalAppoiments,
-} from "@/lib/actions/appointments";
-import { TablePagination } from "./pagination";
-import DeleteButton from "./delete-button";
-import { MoreHorizontal } from "lucide-react";
-import { Button } from "../../ui/button";
-import { DropdownMenuSeparator } from "@radix-ui/react-dropdown-menu";
-import UpdateButton from "./update-button";
+import { GetAppointments } from "@/lib/actions/appointments";
 import { Badge } from "@/components/ui/badge";
-import { FormatDateTime } from "@/lib/utils";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { MoveUpRight } from "lucide-react";
 
 export default async function AppointmentTable({
   searchQuery,
@@ -42,17 +22,22 @@ export default async function AppointmentTable({
 }) {
   const items_per_page = 9;
 
-  const [totalAppointments, appointments] = await Promise.all([
-    GetTotalAppoiments(),
+  const [appointments] = await Promise.all([
     GetAppointments(searchQuery, page, items_per_page),
   ]);
 
-  const totalPages = Math.ceil(totalAppointments / items_per_page);
   return (
     <Card className="w-full shadow-none bg-background">
       <CardHeader>
-        <CardTitle>Appointments</CardTitle>
-        <CardDescription>Manage appointments.</CardDescription>
+        <div className="flex items-center justify-between">
+          <CardTitle>Appointments</CardTitle>
+          <Link href="/dashboard/appointments">
+            <Button variant="outline" className="flex items-center">
+              View More
+              <MoveUpRight size={18} className="ml-1" />
+            </Button>
+          </Link>
+        </div>
       </CardHeader>
       <CardContent>
         <Table>
@@ -67,9 +52,6 @@ export default async function AppointmentTable({
               <TableHead className="table-cell">Service</TableHead>
               <TableHead className="table-cell">Schedule</TableHead>
               <TableHead className="table-cell">Status</TableHead>
-              <TableHead>
-                <span className="sr-only">Actions</span>
-              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -98,7 +80,8 @@ export default async function AppointmentTable({
                 </TableCell>
                 <TableCell>
                   <p className="font-normal">
-                    {FormatDateTime(new Date(item.schedule))}
+                    {new Date(item.schedule).toLocaleTimeString()} -{" "}
+                    {new Date(item.schedule).toLocaleDateString()}
                   </p>
                 </TableCell>
                 <TableCell className="font-medium">
@@ -117,40 +100,11 @@ export default async function AppointmentTable({
                     }
                   })()}
                 </TableCell>
-                <TableCell>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button aria-haspopup="true" size="icon" variant="ghost">
-                        <MoreHorizontal className="h-4 w-4" />
-                        <span className="sr-only">Toggle menu</span>
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuItem>
-                        <UpdateButton id={item.id} />
-                      </DropdownMenuItem>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem>
-                        <DeleteButton id={item.id} />
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </CardContent>
-      <CardFooter>
-        <div className="text-xs text-muted-foreground">
-          <strong>{(page - 1) * items_per_page + 1}</strong>-
-          <strong>{Math.min(page * items_per_page, totalAppointments)}</strong>{" "}
-          of <strong>{totalAppointments}</strong>
-        </div>
-        <div className="ml-auto">
-          <TablePagination totalPages={totalPages} />
-        </div>
-      </CardFooter>
     </Card>
   );
 }

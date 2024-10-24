@@ -16,6 +16,7 @@ import { Loader } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { AppointmentT } from "@/components/appointments/appointment-card";
+import { Input } from "@/components/ui/input";
 
 export default function UpdateAppointmentForm({
   item,
@@ -50,6 +51,23 @@ export default function UpdateAppointmentForm({
   return (
     <form onSubmit={handleSubmit}>
       <div className="grid gap-4 mt-5 container max-w-screen-sm mx-auto">
+        <div>
+          <h1 className="text-center text-xl">
+            <span className=" font-semibold">{item.name}</span>
+            <span>&apos; Appointment</span>
+          </h1>
+        </div>
+        <div className="grid gap-2">
+          <Label htmlFor="schedule">Schedule</Label>
+          <Input
+            name="schedule"
+            id="schedule"
+            type="datetime-local"
+            placeholder=""
+            defaultValue={new Date(item.schedule).toISOString().slice(0, 16)}
+            required
+          />
+        </div>
         <div className="grid gap-2">
           <input
             name="id"

@@ -39,7 +39,7 @@ export async function GetMyAppointments(user_id: string) {
 
     const { error, data } = await supabase
       .from("appointments")
-      .select(`*, user_id(email), service_id(name)`)
+      .select(`*, user_id(email), service_id(*)`)
       .eq("user_id", user_id)
       .order("created_at", { ascending: false });
 
@@ -127,7 +127,10 @@ export async function UpdateAppointment(formData: FormData) {
     const supabase = createClient();
     const { error } = await supabase
       .from("appointments")
-      .update({ status: formData.get("status") })
+      .update({
+        status: formData.get("status"),
+        schedule: formData.get("schedule"),
+      })
       .eq("id", formData.get("id"))
       .select();
 
