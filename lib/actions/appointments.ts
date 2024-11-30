@@ -182,3 +182,24 @@ export async function GetTotalAppoiments() {
     return 0;
   }
 }
+
+export async function GetAllAppointments() {
+  try {
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from("appointments")
+      .select(`*, service_id(*)`);
+
+    if (error) {
+      console.error(error.message);
+      return [];
+    }
+    return data || [];
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+      return [];
+    }
+    return [];
+  }
+}

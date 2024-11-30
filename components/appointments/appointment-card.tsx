@@ -135,4 +135,5 @@ export type AppointmentT = {
   service_id: ServiceT;
   status: "PENDING" | "CANCELLED" | "ACCEPTED" | "COMPLETED";
   user_id: string;
+  cancelation_note: string;
 };
