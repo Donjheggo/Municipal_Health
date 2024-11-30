@@ -8,6 +8,7 @@ import { Badge } from "../ui/badge";
 import { FormatDateTime } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { base64Logo } from "@/lib/utils";
+import CancelDialog from "./cancel-modal";
 
 export default function AppointmentCard({ item }: { item: AppointmentT }) {
   // Function to generate PDF
@@ -96,7 +97,7 @@ export default function AppointmentCard({ item }: { item: AppointmentT }) {
             </h1>
           </div>
         </div>
-        {item.status === "PENDING" && <CancelButton id={item.id} />}
+        {item.status === "PENDING" && <CancelDialog id={item.id} />}
         {item.status === "ACCEPTED" && (
           <Button onClick={generatePDF}>Save PDF</Button>
         )}

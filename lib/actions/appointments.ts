@@ -103,13 +103,16 @@ export async function GetAppointmentById(id: string) {
   }
 }
 
-export async function CancelAppointment(id: string) {
+export async function CancelAppointment(form: FormData) {
   try {
     const supabase = createClient();
     const { error } = await supabase
       .from("appointments")
-      .update({ status: "CANCELLED" })
-      .eq("id", id)
+      .update({
+        status: "CANCELLED",
+        cancelation_note: form.get("cancelation_note"),
+      })
+      .eq("id", form.get("id"))
       .select();
 
     if (error) {
