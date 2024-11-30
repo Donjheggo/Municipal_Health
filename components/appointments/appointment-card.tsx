@@ -1,13 +1,12 @@
 "use client";
 
-import CancelButton from "./cancel-button";
 import { jsPDF } from "jspdf";
 import { Tables } from "@/database.types";
 import { ActivityIcon, CalendarClock } from "lucide-react";
 import { Badge } from "../ui/badge";
 import { FormatDateTime } from "@/lib/utils";
 import { Button } from "../ui/button";
-import { base64Logo } from "@/lib/utils";
+import { base64Logo } from "@/lib/base64Logo";
 import CancelDialog from "./cancel-modal";
 
 export default function AppointmentCard({ item }: { item: AppointmentT }) {
@@ -71,11 +70,12 @@ export default function AppointmentCard({ item }: { item: AppointmentT }) {
 
     // Reset font size for normal text
     doc.setFontSize(12);
-    doc.text(`Name: ${item.name}`, 10, personDetailsY + 10);
-    doc.text(`Birthdate: ${item.birthdate}`, 10, personDetailsY + 20);
-    doc.text(`Address: ${item.address}`, 10, personDetailsY + 30);
-    doc.text(`Contact Number: ${item.contact_number}`, 10, personDetailsY + 40);
-    doc.text(`Gender: ${item.gender}`, 10, personDetailsY + 50);
+    doc.text(`Booking number: ${item.id}`, 10, personDetailsY + 10);
+    doc.text(`Name: ${item.name}`, 10, personDetailsY + 20);
+    doc.text(`Birthdate: ${item.birthdate}`, 10, personDetailsY + 30);
+    doc.text(`Address: ${item.address}`, 10, personDetailsY + 40);
+    doc.text(`Contact Number: ${item.contact_number}`, 10, personDetailsY + 50);
+    doc.text(`Gender: ${item.gender}`, 10, personDetailsY + 60);
 
     // Save the PDF
     doc.save("appointment.pdf");
