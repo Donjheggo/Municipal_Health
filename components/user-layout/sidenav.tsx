@@ -8,6 +8,7 @@ import {
   CalendarDays,
   LayoutDashboard,
   Users,
+  ScrollText,
 } from "lucide-react";
 import { ThemeToggler } from "../themes/theme-toggler";
 import { signOut } from "@/lib/actions/auth-action";
@@ -132,6 +133,11 @@ export const adminLinks = [
     name: "Appointments",
     href: "/dashboard/appointments",
     icon: <CalendarDays />,
+  },
+  {
+    name: "Announcements",
+    href: "/dashboard/announcements",
+    icon: <ScrollText />,
   },
   {
     name: "Users",

@@ -13,6 +13,7 @@ import {
   Hospital,
   ArrowRight,
 } from "lucide-react";
+import AnnouncementCard from "@/components/admin/announcement/announcement-card";
 
 export default function Home() {
   return (
@@ -78,11 +79,14 @@ export default function Home() {
             <Link href="/appointments">
               <Button className="w-full" variant="outline">
                 View Appointments
-                <ArrowRight size={18} className="ml-2"/>
+                <ArrowRight size={18} className="ml-2" />
               </Button>
             </Link>
           </CardContent>
         </Card>
+      </div>
+      <div className="mt-5">
+        <AnnouncementCard />
       </div>
     </div>
   );
