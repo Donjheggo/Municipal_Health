@@ -67,6 +67,7 @@ export default async function AppointmentTable({
               <TableHead className="table-cell">Service</TableHead>
               <TableHead className="table-cell">Schedule</TableHead>
               <TableHead className="table-cell">Status</TableHead>
+              <TableHead className="table-cell">Created At</TableHead>
               <TableHead>
                 <span className="sr-only">Actions</span>
               </TableHead>
@@ -116,6 +117,11 @@ export default async function AppointmentTable({
                         return null;
                     }
                   })()}
+                </TableCell>
+                <TableCell>
+                  <p className="font-normal">
+                    {FormatDateTime(new Date(item.created_at))}
+                  </p>
                 </TableCell>
                 <TableCell>
                   <DropdownMenu>
