@@ -67,6 +67,7 @@ export default async function AppointmentTable({
               <TableHead className="table-cell">Service</TableHead>
               <TableHead className="table-cell">Schedule</TableHead>
               <TableHead className="table-cell">Status</TableHead>
+              <TableHead className="table-cell">Cancelation note</TableHead>
               <TableHead className="table-cell">Created At</TableHead>
               <TableHead>
                 <span className="sr-only">Actions</span>
@@ -117,6 +118,9 @@ export default async function AppointmentTable({
                         return null;
                     }
                   })()}
+                </TableCell>
+                <TableCell>
+                  <p className="font-normal">{item.cancelation_note}</p>
                 </TableCell>
                 <TableCell>
                   <p className="font-normal">
