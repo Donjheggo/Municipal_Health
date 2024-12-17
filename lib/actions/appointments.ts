@@ -13,7 +13,7 @@ export async function GetAppointments(
     const query = supabase
       .from("appointments")
       .select(`*, user_id(email), service_id(name)`)
-      .order("name", { ascending: true })
+      .order("created_at", { ascending: false })
       .range((page - 1) * items_per_page, page * items_per_page - 1);
 
     const { data, error } = searchQuery
